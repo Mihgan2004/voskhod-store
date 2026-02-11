@@ -7,6 +7,9 @@ import { Stamp } from './components/Stamp';
 import { useCart } from './store';
 import { COLLECTIONS, PRODUCTS } from './data';
 import { Collection, Product } from './types';
+import { WelcomeBlock } from './components/WelcomeBlock';
+import { TeeIntroBlock } from './components/TeeIntroBlock';
+
 
 // --- Page Components (Inline for single-file structure requirement, conceptually separate) ---
 
@@ -14,8 +17,8 @@ const Footer = () => (
   <footer className="mt-32 border-t border-white/5 py-12 px-6">
     <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
       <div className="text-xs text-gray-600 font-mono">
-        <p>© 2024 VOSKHOD. MOSCOW.</p>
-        <p className="mt-1">ALL SYSTEMS NOMINAL.</p>
+        <p>© 2024 ВОСХОД. МОСКВА.</p>
+        <p className="mt-1">ВСЕ ПРАВА ЗАЩИЩЕНЫ.</p>
       </div>
       <div className="flex gap-6 text-xs text-gray-400 uppercase tracking-widest">
         <Link to="/legal/offer" className="hover:text-gold">Offer</Link>
@@ -33,40 +36,26 @@ const HomePage = () => {
   return (
     <div className="animate-fade-in">
       <Hero />
-      
-      {/* Featured Collections */}
-      <section className="max-w-7xl mx-auto px-6 mb-32">
-        <div className="flex justify-between items-end mb-12 border-b border-white/5 pb-4">
-          <h2 className="text-xl font-light text-white">SECTORS</h2>
-          <Link to="/collections" className="text-xs text-gold hover:underline underline-offset-4 uppercase tracking-widest">
-            View All
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {featuredCollections.map(col => (
-            <Link key={col.id} to={`/collections/${col.slug}`} className="group block bg-white/5 p-8 rounded-xl hover:bg-white/10 transition-colors border border-transparent hover:border-white/10">
-              <div className="flex justify-between items-start mb-12">
-                <span className="text-[10px] font-mono text-gray-500">{col.id.toUpperCase()}</span>
-                {col.tag === 'LIMITED' && <span className="w-2 h-2 rounded-full bg-crimson shadow-[0_0_8px_rgba(255,77,77,0.8)]"></span>}
-              </div>
-              <h3 className="text-2xl font-light text-gray-200 group-hover:text-white">{col.name}</h3>
-              <p className="text-xs text-gray-500 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {col.description}
-              </p>
-            </Link>
-          ))}
-        </div>
-      </section>
+      <WelcomeBlock />
+      <TeeIntroBlock />
 
       {/* Featured Products */}
-      <section className="max-w-7xl mx-auto px-6">
-        <div className="flex justify-between items-end mb-12 border-b border-white/5 pb-4">
-          <h2 className="text-xl font-light text-white">IN STOCK</h2>
-          <Link to="/catalog" className="text-xs text-gold hover:underline underline-offset-4 uppercase tracking-widest">
-            Full Catalog
-          </Link>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-16">
+<section className="max-w-7xl mx-auto px-6 pt-24 md:pt-32">
+  <div className="flex items-center justify-between mb-16">
+    <div className="flex items-center gap-4">
+      <span className="text-[18px] font-mono tracking-widest text-[#9FA3B0]">В НАЛИЧИИ</span>
+      <span className="h-px w-24 bg-white/10" />
+      <span className="text-[16px] font-mono tracking-widest text-white/30">СМОТРЕТЬ</span>
+    </div>
+
+    <Link
+      to="/catalog"
+      className="text-[18px] font-mono tracking-widest text-[#C6902E] hover:text-[#C6902E] uppercase"
+    >
+      В КАТАЛОГ →
+    </Link>
+  </div>
+<div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-14 md:gap-y-16">
           {featuredProducts.map(p => <ProductCard key={p.id} product={p} />)}
         </div>
       </section>
